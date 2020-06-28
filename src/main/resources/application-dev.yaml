@@ -1,0 +1,10 @@
+# service config
+server:
+  port: 8099
+  servlet:
+    context-path: /
+
+
+spring:
+  application:
+    name: virgo

@@ -31,6 +31,12 @@ sourceSets {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// https://mvnrepository.com/artifact/com.google.guava/guava
+	compile group: 'com.google.guava', name: 'guava', version: '28.1-jre'
+
+	compileOnly 'org.projectlombok:lombok'
+
 }
 
 test {
