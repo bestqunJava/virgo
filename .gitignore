@@ -1,0 +1,87 @@
+# maven ignore
+target/
+
+# gradle ignore
+.gradle/
+out/
+build/
+gradle
+.gradle/*
+.gradle/buildOutputCleanup/
+
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+classes/
+gradle/
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp jar
+*.jar
+
+# temp ignore
+*.log*
+*.cache
+*.diff
+*.patch
+*.tmp
+*.swp
+
+# system ignore
+.DS_Store
+Thumbs.db
+hs_err_pid*
+
+# gradle module ignore
+passover-*/*.ipr
+passover-*/*.iml
+passover-*/*.iws
+passover-*/.DS_Store
+passover-*/._.DS_Store
+passover-*/target/
+passover-*/*.swp
+passover-*/build/
+passover-*/.project
+passover-*/gradle
+passover-*/.classpath
+passover-*/.settings
+passover-*/*.log*
+passover-*/hs_err_pid*
+passover-*/classes/
+kislev-*/Thumbs.db
+passover-*/logs/
+passover-*/repository/
+passover-*/uploads/
+wusong-cases-flow-manager-b/
+
+logs/
+gradlew
+gradlew.bat
+passover-batch/gradlew
+passover-batch/gradlew.bat
+passover-controller/gradlew
+passover-controller/gradlew.bat
+passover-service/gradlew
+passover-service/gradlew.bat
+passover-sms/gradlew
+passover-sms/gradlew.bat
+git
+
+.idea/dictionaries
+.idea/misc.xml
+.idea/thriftCompiler.xml
+src/main/resources/static/
+*.lock
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/buildOutputCleanup/cache.properties
+.gradle
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/buildOutputCleanup/cache.properties
+.idea/$CACHE_FILE$
