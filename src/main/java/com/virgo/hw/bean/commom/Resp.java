@@ -1,6 +1,7 @@
 package com.virgo.hw.bean.commom;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.virgo.hw.bean.enums.RespType;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -148,50 +149,8 @@ public class Resp<T> {
         return ok(code, RespType.OK.getMessage(), data, null);
     }
 
-    /**
-     * javadoc ok
-     *
-     * @param data  接口需要返回的数据
-     * @param extra 额外字段
-     * @return com.ws.leo.common.response.LeoResp<T>
-     * @apiNote 接口处理成功, 但需要封装额外字段
-     * @author weng xiaoyong
-     * @date 2019/10/16 15:13
-     * @modified none
-     */
-    public static <T> Resp<T> ok(T data, Object extra) {
-        return ok(RespType.OK.getCode(), RespType.OK.getMessage(), data, extra);
-    }
 
-    /**
-     * javadoc ok
-     *
-     * @param message 接口处理标识message
-     * @param data    需要返回的data
-     * @return com.ws.leo.common.response.LeoResp<T>
-     * @apiNote 接口处理成功, 需要特殊的message与前端交互
-     * @author weng xiaoyong
-     * @date 2019/10/11 11:16
-     * @modified none
-     */
-    public static <T> Resp<T> ok(String message, T data) {
-        return ok(RespType.OK.getCode(), message, data, null);
-    }
 
-    /**
-     * javadoc ok
-     *
-     * @param respType 携带逻辑code 和 message
-     * @param data     需要返回的数据
-     * @return com.ws.leo.common.response.LeoResp<T>
-     * @apiNote 天工平台自定义枚举类型包裹
-     * @author weng xiaoyong
-     * @date 2019/10/11 11:17
-     * @modified none
-     */
-    public static <T> Resp<T> ok(RespType respType, T data) {
-        return ok(respType.getCode(), respType.getMessage(), data, null);
-    }
 
     /**
      * javadoc ok
@@ -226,59 +185,6 @@ public class Resp<T> {
         return new Resp<>(code, message, data, extra);
     }
 
-    /**
-     * javadoc error
-     *
-     * @return com.ws.leo.common.response.LeoResp<T>
-     * @apiNote 接口处理异常 或者 逻辑异常, 返回一个默认的携带错误信息的结果
-     * @author weng xiaoyong
-     * @date 2019/10/11 11:20
-     * @modified none
-     */
-    public static <T> Resp<T> error() {
-        return new Resp<T>()
-                .setCode(RespType.ERROR.getCode())
-                .setMessage(RespType.ERROR.getMessage());
-    }
-
-    /**
-     * javadoc error
-     *
-     * @param data 接口返回的数据
-     * @return com.ws.leo.common.response.LeoResp<T>
-     * @apiNote 接口处理异常 或者 逻辑异常, 但依然有数据需要返回
-     * 使用默认的错误code 及 message 进行封装
-     * @author weng xiaoyong
-     * @date 2019/10/11 11:20
-     * @modified none
-     */
-    public static <T> Resp<T> error(T data) {
-        return ok(RespType.ERROR.getCode(), RespType.ERROR.getMessage(), data, null);
-    }
-
-    /**
-     * javadoc error
-     *
-     * @param code 自定义error code
-     * @param data 需要返回的数据
-     * @return com.ws.leo.common.response.LeoResp<T>
-     * @apiNote 接口处理异常 或者 逻辑异常, 但依然有数据需要返回
-     * 采用自定义code 及 默认的错误message进行封装
-     * @author weng xiaoyong
-     * @date 2019/10/11 11:21
-     * @modified none
-     */
-    public static <T> Resp<T> error(Integer code, T data) {
-        return ok(code, RespType.ERROR.getMessage(), data, null);
-    }
-
-    public static <T> Resp<T> error(String message, T data) {
-        return ok(RespType.ERROR.getCode(), message, data, null);
-    }
-
-    public static <T> Resp<T> error(RespType respType) {
-        return ok(respType.getCode(), respType.getMessage(), null);
-    }
 
     /**
      * javadoc error

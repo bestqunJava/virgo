@@ -1,4 +1,4 @@
-package com.virgo.hw.bean.commom;
+package com.virgo.hw.bean.enums;
 
 /**
  * javadoc 返回值code message枚举类
