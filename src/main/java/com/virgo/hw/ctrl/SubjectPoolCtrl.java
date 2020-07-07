@@ -1,13 +1,14 @@
 package com.virgo.hw.ctrl;
 
+import com.virgo.hw.bean.dto.CollectPhotoResult;
 import com.virgo.hw.bean.dto.SubjectPoolDTO;
 import com.virgo.hw.service.ISubjectPoolService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 /**
  * @author wangchenkai
@@ -15,6 +16,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("virgo/")
+@Slf4j
 public class SubjectPoolCtrl {
 
     @Resource
@@ -23,5 +25,16 @@ public class SubjectPoolCtrl {
     @PostMapping("subject/pool/create")
     public Integer getTransactionRecord(@RequestBody SubjectPoolDTO dto) {
         return subjectPoolService.insertEntity(dto);
+    }
+
+    @PostMapping("subject/pool/collect")
+    public CollectPhotoResult photoCollect(@RequestParam("file") MultipartFile file) {
+        try {
+            return subjectPoolService.photoCollect(file.getInputStream());
+        } catch (IOException e) {
+            log.error("获取上传图片流异常!");
+            throw new RuntimeException("获取上传图片流异常!", e);
+        }
+
     }
 }

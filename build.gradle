@@ -30,12 +30,20 @@ sourceSets {
 	}
 }
 
+ext {
+	set('springCloudAlibabaVersion', "2.2.0.RELEASE")
+	set('springCloudVersion', "Hoxton.SR1")
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-undertow
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-undertow', version: '2.2.5.RELEASE'
@@ -85,6 +93,13 @@ dependencies {
 
 configurations {
 	compile.exclude module:'spring-boot-starter-tomcat'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 test {
