@@ -1,6 +1,5 @@
 package com.virgo.hw.bean.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -9,8 +8,6 @@ import lombok.Data;
  */
 @Data
 public class SubjectPoolDTO {
-
-    private Integer id;
 
     private String subjectId;
 
