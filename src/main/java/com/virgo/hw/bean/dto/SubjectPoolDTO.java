@@ -1,5 +1,6 @@
-package com.virgo.hw.bean.entity;
+package com.virgo.hw.bean.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -7,7 +8,7 @@ import lombok.Data;
  * @since 2020/6/28 5:07 下午
  */
 @Data
-public class SubjectPoolEntity {
+public class SubjectPoolDTO {
 
     private Integer id;
 
@@ -30,7 +31,5 @@ public class SubjectPoolEntity {
     private Integer subjectDegree;
 
     private Integer past;
-
-    private String createTime;
 
 }
