@@ -61,16 +61,20 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
         String salt = String.valueOf(System.currentTimeMillis());
         String curTime = String.valueOf(System.currentTimeMillis() / 1000);
         String question = APP_KEY + YouDaoSignUtil.truncate(path) + salt + curTime + APP_SECRET;
-        YouDaoResponse<CollectPhotoResult> collectPhotoResultYouDaoResponse = youDaoApiClient.photoCollect(new CollectPhotoDTO()
+        YouDaoResponse<CollectPhotoResult> resp = youDaoApiClient.photoCollect(new CollectPhotoDTO()
                 .setAppKey(APP_KEY)
-                .setCurTime(curTime)
-                .setQuestion(question)
+                .setCurtime(curTime)
+                .setQ(path)
                 .setSalt(salt)
                 .setType(TYPE)
                 .setSignType(SIGN_TYPE)
                 .setSign(YouDaoSignUtil.getDigest(question))
                 .setSearchType("img")
         );
-        return null;
+        if (YouDaoResponse.ok(resp)) {
+            return resp.getData();
+        }
+        log.error("有道云拍照搜题服务失败");
+        throw new RuntimeException("有道云拍照搜题服务失败");
     }
 }

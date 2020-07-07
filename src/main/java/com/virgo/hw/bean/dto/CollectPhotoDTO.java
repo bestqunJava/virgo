@@ -12,17 +12,14 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CollectPhotoDTO {
 
-    @JsonProperty("q")
-    private String question;
+    private String q;
 
     private String appKey;
 
     private String salt;
 
-    @JsonProperty("curtime")
-    private String curTime;
+    private String curtime;
 
-    @JsonProperty("sign")
     private String sign;
 
     private String signType;
