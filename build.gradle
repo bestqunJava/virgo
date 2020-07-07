@@ -70,6 +70,9 @@ dependencies {
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
 	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 
+	// https://mvnrepository.com/artifact/com.baomidou/mybatisplus-spring-boot-starter
+	compile group: 'com.github.thinwonton.mybatismetamodel', name: 'mybatisplus', version: '1.0.0'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
