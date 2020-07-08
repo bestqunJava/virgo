@@ -63,9 +63,10 @@
     | chapterId      | 所属章节ID    |
     | firstLevelId   | 一级标题ID    |
     | secondLevelId      | 一级标题ID    |
-    | subjectContent      | 试题内容    |
+    | subjectContent      | 题干    |
     | referenceContent      | 参考答案    |
     | analysisContent      | 解析内容    |
+    | subjectDegree      | 试题难度 1，2，3，4，5     |
     | past      | 真题 0否 1是    |
 * 请求参数示例: 
     ```json
@@ -97,7 +98,42 @@
     | message      | success    |
     | data   | 影响行数    |
    
-    
+#### 2 试题类型
+* 请求方式: GET 
+* 请求格式: JSON
+* 响应格式: JSON
+* URL: http://106.55.161.213:8099/virgo/common/subject/types
+* 请求参数: 无
+* 响应结果:
+    ```json
+      {
+          "code": 0,
+          "message": "success",
+          "data": [
+              {
+                  "k": 0,
+                  "v": "填空题"
+              },
+              {
+                  "k": 1,
+                  "v": "选择题"
+              },
+              {
+                  "k": 2,
+                  "v": "解答题"
+              }
+          ]
+      }
+    ```
+* 响应参数说明:
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | code | 自定义code |
+    | message      | success  |
+    | data   | 影响行数    |
+    | k   | key    |
+    | v   | value    |
 
 
 
