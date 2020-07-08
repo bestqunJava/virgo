@@ -98,7 +98,7 @@
     | message      | success    |
     | data   | 影响行数    |
    
-#### 2 试题类型
+#### 3 试题类型
 * 请求方式: GET 
 * 请求格式: JSON
 * 响应格式: JSON
