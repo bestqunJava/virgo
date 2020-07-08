@@ -9,10 +9,10 @@ spring:
   application:
     name: virgo
   datasource:
-    url: jdbc:mysql://106.55.161.213/:3306/phpems?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    password: aw4nTMcxNBwtEAkx
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: phpems
+    url: jdbc:mysql://106.55.161.213:3306/sub?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    password: rd4ZeBhTGABkGwid
+    driver-class-name: com.mysql.jdbc.Driver
+    username: sub
 
 
 feign:
