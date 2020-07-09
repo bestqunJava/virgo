@@ -1,9 +1,7 @@
 package com.virgo.hw.service;
 
-import com.virgo.hw.bean.dto.CollectPhotoDTO;
-import com.virgo.hw.bean.dto.CollectPhotoResult;
 import com.virgo.hw.bean.dto.SubjectPoolDTO;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.virgo.hw.bean.vo.SubjectPoolVO;
 
 import java.io.InputStream;
 
@@ -23,7 +21,7 @@ public interface ISubjectPoolService {
      * @date 2020/7/7  11:08 上午
      * @modified none
      */
-    Integer insertEntity(SubjectPoolDTO dto);
+    String insertEntity(SubjectPoolDTO dto);
 
     /**
      * javadoc photoCollect
@@ -35,8 +33,18 @@ public interface ISubjectPoolService {
      * @date 2020/7/7  3:15 下午
      * @modified none
      */
-    Integer photoCollect(InputStream inputStream);
+    String photoCollect(InputStream inputStream);
 
-
+    /**
+     * javadoc findEntity
+     * @apiNote 详情
+     *
+     * @param subjectId subjectId
+     * @return com.virgo.hw.bean.vo.SubjectPoolVO
+     * @author wang chenkai
+     * @date 2020/7/9  4:45 下午
+     * @modified none
+     */
+    SubjectPoolVO findEntity(String subjectId);
 
 }

@@ -1,10 +1,19 @@
 package com.virgo.hw.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.virgo.hw.bean.commom.Pair;
 import com.virgo.hw.bean.dto.*;
+import com.virgo.hw.bean.entity.ChapterEntity;
+import com.virgo.hw.bean.entity.FistLevelEntity;
+import com.virgo.hw.bean.entity.SecondLevel;
 import com.virgo.hw.bean.entity.SubjectPoolEntity;
 import com.virgo.hw.bean.enums.SnowflakeIdWorker;
+import com.virgo.hw.bean.enums.SubjectTypeEnum;
+import com.virgo.hw.bean.vo.SubjectPoolVO;
 import com.virgo.hw.feign.YouDaoApiClient;
 import com.virgo.hw.mapper.SubjectPoolMapper;
+import com.virgo.hw.service.IChapterService;
+import com.virgo.hw.service.ILevelService;
 import com.virgo.hw.service.ISubjectPoolService;
 import com.virgo.hw.util.YouDaoSignUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +23,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.io.InputStream;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -29,6 +39,12 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
 
     @Resource
     YouDaoApiClient youDaoApiClient;
+
+    @Resource
+    IChapterService chapterService;
+
+    @Resource
+    ILevelService levelService;
 
     /**
      * 上传类型， 仅支持base64上传，请填写固定值1
@@ -47,16 +63,18 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
     private static final String PICTURE_TYPE = "img";
 
     @Override
-    public Integer insertEntity(SubjectPoolDTO dto) {
+    public String insertEntity(SubjectPoolDTO dto) {
+        String subjectId = SnowflakeIdWorker.takeIdString();
         SubjectPoolEntity entity = new SubjectPoolEntity();
         BeanUtils.copyProperties(dto, entity);
-        return subjectPoolMapper.insert(entity.setSubjectId(SnowflakeIdWorker.takeIdString())
+        subjectPoolMapper.insert(entity.setSubjectId(subjectId)
                 .setCreateTime(LocalDateTime.now())
         );
+        return subjectId;
     }
 
     @Override
-    public Integer photoCollect(InputStream picPath) {
+    public String photoCollect(InputStream picPath) {
         String path = YouDaoSignUtil.loadAsBase64(picPath);
         String salt = String.valueOf(System.currentTimeMillis());
         String curTime = String.valueOf(System.currentTimeMillis() / 1000);
@@ -86,9 +104,36 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
                         .setAnalysisContent(q.getAnalysis())
                         .setReferenceContent(q.getAnswer())
                 );
-            }).orElse(0);
+            }).orElse(null);
         }
         log.error("添加试题异常{}", resp);
         throw new RuntimeException("添加试题异常");
+    }
+
+    @Override
+    public SubjectPoolVO findEntity(String subjectId) {
+        SubjectPoolEntity entity = subjectPoolMapper.selectOne(new QueryWrapper<>(new SubjectPoolEntity()
+                .setSubjectId(subjectId)));
+        return Optional.ofNullable(entity).map(r -> {
+            SubjectPoolVO vo = new SubjectPoolVO();
+            BeanUtils.copyProperties(r, vo);
+            if (Objects.nonNull(r.getSubjectType())) {
+                vo.setSubjectType(Pair.of(r.getSubjectType(), SubjectTypeEnum.getEnum(r.getSubjectType()).getMsg()));
+            }
+            if (Objects.nonNull(r.getChapterId())) {
+                ChapterEntity entry = chapterService.findEntry(r.getChapterId());
+                Optional.ofNullable(entry).ifPresent(obj -> vo.setChapter(Pair.of(r.getChapterId(), obj.getChapterName())));
+            }
+            if (Objects.nonNull(r.getFirstLevelId())) {
+                FistLevelEntity entry = levelService.findFirstLevel(r.getFirstLevelId());
+                Optional.ofNullable(entry).ifPresent(obj -> vo.setFirstLevel(Pair.of(r.getFirstLevelId(), entry.getFirstLevelName())));
+            }
+            if (Objects.nonNull(r.getSecondLevelId())) {
+                SecondLevel entry = levelService.findSecondLevel(r.getSecondLevelId());
+                Optional.ofNullable(entry).ifPresent(obj ->
+                        vo.setFirstLevel(Pair.of(r.getSecondLevelId(), entry.getSecondLevelName())));
+            }
+            return vo;
+        }).orElse(null);
     }
 }
