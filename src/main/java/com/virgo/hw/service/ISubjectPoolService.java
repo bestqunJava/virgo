@@ -62,4 +62,16 @@ public interface ISubjectPoolService {
      */
     PageData<SubjectPoolResultVO> listSubject(SubjectQueryDTO dto);
 
+    /**
+     * javadoc deleteEntity
+     * @apiNote 删除
+     *
+     * @param subjectId subjectId
+     * @return java.lang.Integer
+     * @author wang chenkai
+     * @date 2020/7/9  6:55 下午
+     * @modified none
+     */
+    Integer deleteEntity(String subjectId);
+
 }

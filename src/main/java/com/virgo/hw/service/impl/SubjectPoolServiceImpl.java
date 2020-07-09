@@ -1,6 +1,8 @@
 package com.virgo.hw.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.virgo.hw.bean.commom.PageData;
@@ -158,5 +160,13 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
             return vo.setNo(index.incrementAndGet());
         }).collect(Collectors.toList());
         return PageData.page(dto.getPage(), dto.getSize(), data.getTotal(), list);
+    }
+
+    @Override
+    public Integer deleteEntity(String subjectId) {
+        SubjectPoolEntity entity = new SubjectPoolEntity()
+                .setState(1);
+        Wrapper<SubjectPoolEntity> wrapper = new UpdateWrapper<>(new SubjectPoolEntity().setSubjectId(subjectId));
+        return subjectPoolMapper.update(entity, wrapper);
     }
 }

@@ -183,7 +183,6 @@
     | :-----| ----: |
     | code | 自定义code |
     | message      | success  |
-    | data   | 影响行数    |
     | -no   | 编号    |
     | -subjectId   | 试题ID    |
     | -subjectType   | 试题类型    |
@@ -191,6 +190,33 @@
     | -createTime   | 创建时间    |
     | -subjectDegree   | 难度 1,2,3,4,5    |
     | -past   | 真题 0否 1是    |
+
+#### 4 试题删除
+* 请求方式: GET 
+* 请求格式: Content-Type: application/json
+* 响应格式: JSON
+* URL: http://106.55.161.213:8099/virgo/common/subject/delete?subjectId=122506638568456219
+* 请求参数说明
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | subjectId | 试题ID |
+
+* 响应结果:
+    ```json
+     {
+         "code": 0,
+         "message": "success",
+         "data": 1
+     }
+    ```
+* 响应参数说明:
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | code | 自定义code |
+    | message      | success  |
+    | data   | 影响行数    |
 
 
 

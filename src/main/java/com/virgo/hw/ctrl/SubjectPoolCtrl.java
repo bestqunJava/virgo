@@ -43,4 +43,10 @@ public class SubjectPoolCtrl {
     public PageData<SubjectPoolResultVO> listSubject(@RequestBody SubjectQueryDTO dto) {
         return subjectPoolService.listSubject(dto);
     }
+
+    @GetMapping("subject/delete")
+    public Integer delete(@RequestParam("subjectId") String subjectId) {
+        return subjectPoolService.deleteEntity(subjectId);
+    }
+
 }
