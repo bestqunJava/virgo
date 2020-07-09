@@ -1,9 +1,6 @@
 package com.virgo.hw.service.impl;
 
-import com.virgo.hw.bean.dto.CollectPhotoDTO;
-import com.virgo.hw.bean.dto.CollectPhotoResult;
-import com.virgo.hw.bean.dto.SubjectPoolDTO;
-import com.virgo.hw.bean.dto.YouDaoResponse;
+import com.virgo.hw.bean.dto.*;
 import com.virgo.hw.bean.entity.SubjectPoolEntity;
 import com.virgo.hw.bean.enums.SnowflakeIdWorker;
 import com.virgo.hw.feign.YouDaoApiClient;
@@ -17,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.io.InputStream;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * @author wangchenkai
@@ -46,6 +44,8 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
 
     private static final String APP_SECRET = "3I5f2Md09vzlO0P0oblgU8ecNRDRyT0S";
 
+    private static final String PICTURE_TYPE = "img";
+
     @Override
     public Integer insertEntity(SubjectPoolDTO dto) {
         SubjectPoolEntity entity = new SubjectPoolEntity();
@@ -56,25 +56,39 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
     }
 
     @Override
-    public CollectPhotoResult photoCollect(InputStream picPath) {
+    public Integer photoCollect(InputStream picPath) {
         String path = YouDaoSignUtil.loadAsBase64(picPath);
         String salt = String.valueOf(System.currentTimeMillis());
         String curTime = String.valueOf(System.currentTimeMillis() / 1000);
         String question = APP_KEY + YouDaoSignUtil.truncate(path) + salt + curTime + APP_SECRET;
-        YouDaoResponse<CollectPhotoResult> resp = youDaoApiClient.photoCollect(new CollectPhotoDTO()
-                .setAppKey(APP_KEY)
-                .setCurtime(curTime)
-                .setQ(path)
-                .setSalt(salt)
-                .setType(TYPE)
-                .setSignType(SIGN_TYPE)
-                .setSign(YouDaoSignUtil.getDigest(question))
-                .setSearchType("img")
-        );
-        if (YouDaoResponse.ok(resp)) {
-            return resp.getData();
+        YouDaoResponse<CollectPhotoResult> resp;
+        try {
+            resp = youDaoApiClient.photoCollect(new CollectPhotoDTO()
+                    .setAppKey(APP_KEY)
+                    .setCurtime(curTime)
+                    .setQ(path)
+                    .setSalt(salt)
+                    .setType(TYPE)
+                    .setSignType(SIGN_TYPE)
+                    .setSign(YouDaoSignUtil.getDigest(question))
+                    .setSearchType(PICTURE_TYPE)
+            );
+        } catch (Exception e) {
+            log.error("搜题服务异常...");
+            throw new RuntimeException("搜题服务异常...", e);
         }
-        log.error("有道云拍照搜题服务失败");
-        throw new RuntimeException("有道云拍照搜题服务失败");
+        if (YouDaoResponse.ok(resp)) {
+            CollectPhotoResult data = resp.getData();
+            return Optional.ofNullable(data).map(r -> {
+                Question q = r.getQuestions().get(0);
+                return this.insertEntity(new SubjectPoolDTO()
+                        .setSubjectContent(q.getContent())
+                        .setAnalysisContent(q.getAnalysis())
+                        .setReferenceContent(q.getAnswer())
+                );
+            }).orElse(0);
+        }
+        log.error("添加试题异常{}", resp);
+        throw new RuntimeException("添加试题异常");
     }
 }

@@ -35,7 +35,7 @@ public interface ISubjectPoolService {
      * @date 2020/7/7  3:15 下午
      * @modified none
      */
-    CollectPhotoResult photoCollect(InputStream inputStream);
+    Integer photoCollect(InputStream inputStream);
 
 
 

@@ -1,12 +1,14 @@
 package com.virgo.hw.bean.dto;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author wangchenkai
  * @since 2020/6/28 5:07 下午
  */
 @Data
+@Accessors(chain = true)
 public class SubjectPoolDTO {
 
     private String subjectId;

@@ -1,6 +1,5 @@
 package com.virgo.hw.ctrl;
 
-import com.virgo.hw.bean.dto.CollectPhotoResult;
 import com.virgo.hw.bean.dto.SubjectPoolDTO;
 import com.virgo.hw.service.ISubjectPoolService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +27,7 @@ public class SubjectPoolCtrl {
     }
 
     @PostMapping("subject/pool/collect")
-    public CollectPhotoResult photoCollect(@RequestParam("file") MultipartFile file) {
+    public Integer photoCollect(@RequestParam("file") MultipartFile file) {
         try {
             return subjectPoolService.photoCollect(file.getInputStream());
         } catch (IOException e) {
