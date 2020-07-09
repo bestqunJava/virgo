@@ -131,7 +131,7 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
             if (Objects.nonNull(r.getSecondLevelId())) {
                 SecondLevel entry = levelService.findSecondLevel(r.getSecondLevelId());
                 Optional.ofNullable(entry).ifPresent(obj ->
-                        vo.setFirstLevel(Pair.of(r.getSecondLevelId(), entry.getSecondLevelName())));
+                        vo.setSecondLevel(Pair.of(r.getSecondLevelId(), entry.getSecondLevelName())));
             }
             return vo;
         }).orElse(null);
