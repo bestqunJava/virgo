@@ -1,5 +1,8 @@
 package com.virgo.hw.ctrl;
 
+import com.virgo.hw.bean.commom.PageData;
+import com.virgo.hw.bean.dto.SubjectQueryDTO;
+import com.virgo.hw.bean.vo.SubjectPoolResultVO;
 import com.virgo.hw.bean.vo.SubjectPoolVO;
 import com.virgo.hw.service.ISubjectPoolService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,5 +37,10 @@ public class SubjectPoolCtrl {
     @GetMapping("subject/pool")
     public SubjectPoolVO subject(@RequestParam("subjectId") String subjectId) {
         return subjectPoolService.findEntity(subjectId);
+    }
+
+    @PostMapping("subject/pool/list")
+    public PageData<SubjectPoolResultVO> listSubject(@RequestBody SubjectQueryDTO dto) {
+        return subjectPoolService.listSubject(dto);
     }
 }

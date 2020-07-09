@@ -109,6 +109,94 @@
     | data   | 影响行数    |
     | k   | key    |
     | v   | value    |
+    
+#### 3 试题管理
+* 请求方式: POST 
+* 请求格式: Content-Type: application/json
+* 响应格式: JSON
+* URL: http://106.55.161.213:8099/virgo/common/subject/types
+* 请求参数说明
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | page | 当前页 |
+    | size      | 每页大小  |
+    | chapterId   | 章节ID    |
+    | firstLevelId   | 一级知识点ID    |
+    | secondLevelId   | 二级知识点ID    |
+    | subjectType   | 试题类型    |
+    | past   | 真题    |
+    | subjectDegree   | 试题难度    |
+    | source   | 试题来源    |
+    | subjectId   | 相似题编号    |
+    | subjectContent   | 试题内容    |  
+    | startTime   | 开始时间 yyyy-MM-dd HH:mm:ss    |  
+    | endTime   | 结束时间 yyyy-MM-dd HH:mm:ss    |  
+
+* 请求参数示例: 
+    ```json
+      {
+      "page": 1,
+      "size": 10,
+      "chapterId": "c122506638568456219",
+      "firstLevelId": "b122506638568456219",
+      "secondLevelId": "a122506638568456219",
+      "subjectType": 1,
+      "subjectDegree": 1,
+      "source": 1,
+      "subjectId": "122506638568456219",
+      "subjectContent": "x",
+      "startTime": "2020-07-09 14:20:13",
+      "endTime": "2020-07-09 14:20:13"
+      }
+    ```
+* 响应结果:
+    ```json
+      {
+          "code": 0,
+          "message": "success",
+          "data": {
+              "page": 1,
+              "size": 10,
+              "pages": 1,
+              "total": 1,
+              "list": [
+                  {
+                      "no": 1,
+                      "subjectId": "122506638568456219",
+                      "subjectType": {
+                          "k": 1,
+                          "v": "选择题"
+                      },
+                      "subjectContent": "用代入法解下列方程组&#xff0e;<br />\\((1)\\left \\{ {{\\begin{array}{ll} {y&#61;2x} \\\\ {3y&#43;2x&#61;8} \\end{array}}} \\right .\\) <br />\\((2)\\left \\{ {{\\begin{array}{ll} {x-3y&#61;5} \\\\ {2x&#43;y&#61;5} \\end{array}}} \\right .\\) <br />\\((3)\\left \\{ {{\\begin{array}{ll} {\\dfrac {x} {3}&#43;\\dfrac {y} {4}&#61;2} \\\\ {5x-y&#61;11} \\end{array}}} \\right .\\) <br />\\((4)\\left \\{ {{\\begin{array}{ll} {x&#43;1&#61;2y} \\\\ {3(x&#43;1)-2y&#61;1} \\end{array}}} \\right .\\)",
+                      "createTime": "2020-07-09 14:20:13",
+                      "subjectDegree": 1,
+                      "past": 0
+                  }
+              ]
+          }
+      }
+    ```
+* 响应参数说明:
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | code | 自定义code |
+    | message      | success  |
+    | data   | 影响行数    |
+    | -no   | 编号    |
+    | -subjectId   | 试题ID    |
+    | -subjectType   | 试题类型    |
+    | -subjectContent   | 题干    |
+    | -createTime   | 创建时间    |
+    | -subjectDegree   | 难度 1,2,3,4,5    |
+    | -past   | 真题 0否 1是    |
+
+
+
+
+
+
 
 
 

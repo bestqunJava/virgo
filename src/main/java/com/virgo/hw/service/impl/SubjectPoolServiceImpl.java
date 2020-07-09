@@ -1,6 +1,9 @@
 package com.virgo.hw.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.virgo.hw.bean.commom.PageData;
 import com.virgo.hw.bean.commom.Pair;
 import com.virgo.hw.bean.dto.*;
 import com.virgo.hw.bean.entity.ChapterEntity;
@@ -9,6 +12,7 @@ import com.virgo.hw.bean.entity.SecondLevel;
 import com.virgo.hw.bean.entity.SubjectPoolEntity;
 import com.virgo.hw.bean.enums.SnowflakeIdWorker;
 import com.virgo.hw.bean.enums.SubjectTypeEnum;
+import com.virgo.hw.bean.vo.SubjectPoolResultVO;
 import com.virgo.hw.bean.vo.SubjectPoolVO;
 import com.virgo.hw.feign.YouDaoApiClient;
 import com.virgo.hw.mapper.SubjectPoolMapper;
@@ -23,8 +27,11 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.io.InputStream;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * @author wangchenkai
@@ -135,5 +142,21 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
             }
             return vo;
         }).orElse(null);
+    }
+
+    @Override
+    public PageData<SubjectPoolResultVO> listSubject(SubjectQueryDTO dto) {
+        final Page<SubjectPoolEntity> data = PageHelper.startPage(dto.getPage(), dto.getSize(), true)
+                .doSelectPage(() -> subjectPoolMapper.listSubject(dto));
+        final AtomicInteger index = new AtomicInteger((dto.getPage() - 1) * dto.getSize());
+        List<SubjectPoolResultVO> list = data.getResult().stream().map(r -> {
+            SubjectPoolResultVO vo = new SubjectPoolResultVO();
+            BeanUtils.copyProperties(r, vo);
+            if (Objects.nonNull(r.getSubjectType())) {
+                vo.setSubjectType(Pair.of(r.getSubjectType(), SubjectTypeEnum.getEnum(r.getSubjectType()).getMsg()));
+            }
+            return vo.setNo(index.incrementAndGet());
+        }).collect(Collectors.toList());
+        return PageData.page(dto.getPage(), dto.getSize(), data.getTotal(), list);
     }
 }

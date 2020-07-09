@@ -1,6 +1,9 @@
 package com.virgo.hw.service;
 
+import com.virgo.hw.bean.commom.PageData;
 import com.virgo.hw.bean.dto.SubjectPoolDTO;
+import com.virgo.hw.bean.dto.SubjectQueryDTO;
+import com.virgo.hw.bean.vo.SubjectPoolResultVO;
 import com.virgo.hw.bean.vo.SubjectPoolVO;
 
 import java.io.InputStream;
@@ -46,5 +49,17 @@ public interface ISubjectPoolService {
      * @modified none
      */
     SubjectPoolVO findEntity(String subjectId);
+
+    /**
+     * javadoc listSubject
+     * @apiNote 试题管理列表
+     *
+     * @param dto dto
+     * @return com.virgo.hw.bean.commom.PageData<com.virgo.hw.bean.vo.SubjectPoolVO>
+     * @author wang chenkai
+     * @date 2020/7/9  5:32 下午
+     * @modified none
+     */
+    PageData<SubjectPoolResultVO> listSubject(SubjectQueryDTO dto);
 
 }

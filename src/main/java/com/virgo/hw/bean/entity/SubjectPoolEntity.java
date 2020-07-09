@@ -43,6 +43,8 @@ public class SubjectPoolEntity {
 
     private Integer source;
 
+    private Integer state;
+
     private LocalDateTime createTime;
 
 }
