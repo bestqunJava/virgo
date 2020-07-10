@@ -1,6 +1,8 @@
 package com.virgo.hw.ctrl;
 
+import com.virgo.hw.bean.anno.CustomResponseAdvice;
 import com.virgo.hw.bean.commom.PageData;
+import com.virgo.hw.bean.commom.Resp;
 import com.virgo.hw.bean.dto.SubjectPoolDTO;
 import com.virgo.hw.bean.dto.SubjectQueryDTO;
 import com.virgo.hw.bean.vo.SubjectPoolResultVO;
@@ -26,9 +28,10 @@ public class SubjectPoolCtrl {
     ISubjectPoolService subjectPoolService;
 
     @PostMapping("subject/pool/collect")
-    public String photoCollect(@RequestParam("file") MultipartFile file) {
+    @CustomResponseAdvice
+    public Resp<String> photoCollect(@RequestParam("file") MultipartFile file) {
         try {
-            return subjectPoolService.photoCollect(file.getInputStream());
+            return Resp.ok(subjectPoolService.photoCollect(file.getInputStream()));
         } catch (IOException e) {
             log.error("获取上传图片流异常!");
             throw new RuntimeException("获取上传图片流异常!", e);
