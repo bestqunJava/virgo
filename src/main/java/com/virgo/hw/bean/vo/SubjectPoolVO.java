@@ -30,6 +30,6 @@ public class SubjectPoolVO {
 
     private Integer subjectDegree;
 
-    private Pair<Integer, String> past;
+    private Integer past;
 
 }
