@@ -218,7 +218,7 @@
     | message      | success  |
     | data   | 影响行数    |
     
-#### 4 编辑试题
+#### 5 编辑试题
 * 请求方式: POST 
 * 请求格式: Content-Type: application/json
 * 响应格式: JSON
@@ -251,7 +251,7 @@
     | message      | success  |
     | data   | 影响行数    |
 
-#### 5 章节列表
+#### 6 章节列表
 * 请求方式: GET 
 * 请求格式: Content-Type: application/json
 * 响应格式: JSON
@@ -279,7 +279,7 @@
     | data   | k,v   |
 
 
-#### 6 一级知识点
+#### 7 一级知识点
 * 请求方式: GET 
 * 请求格式: Content-Type: application/json
 * 响应格式: JSON
@@ -306,7 +306,7 @@
     | message      | success  |
     | data   | k,v   |
 
-#### 7 二级知识点
+#### 8 二级知识点
 * 请求方式: GET 
 * 请求格式: Content-Type: application/json
 * 响应格式: JSON
