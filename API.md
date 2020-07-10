@@ -311,7 +311,7 @@
 * 请求格式: Content-Type: application/json
 * 响应格式: JSON
 * URL: http://106.55.161.213:8099/virgo/level/second/list
-* 请求参数: firstLevelI: 一级知识点ID
+* 请求参数: firstLevelId: 一级知识点ID
 * 响应结果:
     ```json
     {
