@@ -114,7 +114,7 @@
 * 请求方式: POST 
 * 请求格式: Content-Type: application/json
 * 响应格式: JSON
-* URL: http://106.55.161.213:8099/virgo/common/subject/types
+* URL: http://106.55.161.213:8099/virgo/subject/pool/list
 * 请求参数说明
 
     | 字段 | 含义 | 
@@ -284,7 +284,7 @@
 * 请求格式: Content-Type: application/json
 * 响应格式: JSON
 * URL: http://106.55.161.213:8099/virgo/level/first/list
-* 请求参参数: 无
+* 请求参参数: chapterId: 章节ID
 * 响应结果:
     ```json
     {
@@ -311,7 +311,7 @@
 * 请求格式: Content-Type: application/json
 * 响应格式: JSON
 * URL: http://106.55.161.213:8099/virgo/level/second/list
-* 请求参参数: 无
+* 请求参数: firstLevelI: 一级知识点ID
 * 响应结果:
     ```json
     {

@@ -43,15 +43,15 @@ public class ILevelServiceImpl implements ILevelService {
     }
 
     @Override
-    public List<Pair<String, String>> listFirstLevel() {
-        Wrapper<FistLevelEntity> wrapper = new QueryWrapper<>(new FistLevelEntity());
+    public List<Pair<String, String>> listFirstLevel(String chapterId) {
+        Wrapper<FistLevelEntity> wrapper = new QueryWrapper<>(new FistLevelEntity().setChapterId(chapterId));
         return fistLevelMapper.selectList(wrapper).stream().map(r ->
                 Pair.of(r.getFirstLevelId(), r.getFirstLevelName())).collect(Collectors.toList());
     }
 
     @Override
-    public List<Pair<String, String>> listSecondLevel() {
-        Wrapper<SecondLevelEntity> wrapper = new QueryWrapper<>(new SecondLevelEntity());
+    public List<Pair<String, String>> listSecondLevel(String firstLevelId) {
+        Wrapper<SecondLevelEntity> wrapper = new QueryWrapper<>(new SecondLevelEntity().setFirstLevelId(firstLevelId));
         return secondLevelMapper.selectList(wrapper).stream().map(r ->
                 Pair.of(r.getSecondLevelId(), r.getSecondLevelName())).collect(Collectors.toList());
     }

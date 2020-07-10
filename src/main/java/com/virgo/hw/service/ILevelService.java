@@ -40,22 +40,24 @@ public interface ILevelService {
      * javadoc listFirstLevel
      * @apiNote 一级知识点列表
      *
-     * @return java.util.List<com.virgo.hw.bean.entity.FistLevelEntity>
+     * @param chapterId chapterId
+     * @return java.util.List<com.virgo.hw.bean.commom.Pair<java.lang.String,java.lang.String>>
      * @author wang chenkai
-     * @date 2020/7/10  10:26 上午
+     * @date 2020/7/10  11:58 上午
      * @modified none
      */
-    List<Pair<String, String>> listFirstLevel();
+    List<Pair<String, String>> listFirstLevel(String chapterId);
 
     /**
      * javadoc listSecondLevel
      * @apiNote 二级知识点列表
      *
-     * @return java.util.List<com.virgo.hw.bean.entity.SecondLevelEntity>
+     * @param firstLevelId firstLevelId
+     * @return java.util.List<com.virgo.hw.bean.commom.Pair<java.lang.String,java.lang.String>>
      * @author wang chenkai
-     * @date 2020/7/10  10:27 上午
+     * @date 2020/7/10  11:58 上午
      * @modified none
      */
-    List<Pair<String, String>> listSecondLevel();
+    List<Pair<String, String>> listSecondLevel(String firstLevelId);
 
 }
