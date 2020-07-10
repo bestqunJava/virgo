@@ -1,8 +1,10 @@
 package com.virgo.hw.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.virgo.hw.bean.commom.Pair;
 import com.virgo.hw.bean.entity.FistLevelEntity;
-import com.virgo.hw.bean.entity.SecondLevel;
+import com.virgo.hw.bean.entity.SecondLevelEntity;
 import com.virgo.hw.mapper.FistLevelMapper;
 import com.virgo.hw.mapper.SecondLevelMapper;
 import com.virgo.hw.service.ILevelService;
@@ -10,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author wangchenkai
@@ -33,8 +37,22 @@ public class ILevelServiceImpl implements ILevelService {
     }
 
     @Override
-    public SecondLevel findSecondLevel(String secondLevelId) {
-        return secondLevelMapper.selectOne(new QueryWrapper<>(new SecondLevel()
+    public SecondLevelEntity findSecondLevel(String secondLevelId) {
+        return secondLevelMapper.selectOne(new QueryWrapper<>(new SecondLevelEntity()
                 .setChapterId(secondLevelId)));
+    }
+
+    @Override
+    public List<Pair<String, String>> listFirstLevel() {
+        Wrapper<FistLevelEntity> wrapper = new QueryWrapper<>(new FistLevelEntity());
+        return fistLevelMapper.selectList(wrapper).stream().map(r ->
+                Pair.of(r.getFirstLevelId(), r.getFirstLevelName())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Pair<String, String>> listSecondLevel() {
+        Wrapper<SecondLevelEntity> wrapper = new QueryWrapper<>(new SecondLevelEntity());
+        return secondLevelMapper.selectList(wrapper).stream().map(r ->
+                Pair.of(r.getSecondLevelId(), r.getSecondLevelName())).collect(Collectors.toList());
     }
 }

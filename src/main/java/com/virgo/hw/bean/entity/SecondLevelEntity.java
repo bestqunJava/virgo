@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Data
 @Accessors(chain = true)
 @TableName("second_level")
-public class SecondLevel {
+public class SecondLevelEntity {
 
     private String id;
 

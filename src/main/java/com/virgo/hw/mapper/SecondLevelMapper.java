@@ -1,7 +1,7 @@
 package com.virgo.hw.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.virgo.hw.bean.entity.SecondLevel;
+import com.virgo.hw.bean.entity.SecondLevelEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Mapper
-public interface SecondLevelMapper extends BaseMapper<SecondLevel> {
+public interface SecondLevelMapper extends BaseMapper<SecondLevelEntity> {
 
 }

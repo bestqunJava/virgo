@@ -1,6 +1,7 @@
 package com.virgo.hw.ctrl;
 
 import com.virgo.hw.bean.commom.PageData;
+import com.virgo.hw.bean.dto.SubjectPoolDTO;
 import com.virgo.hw.bean.dto.SubjectQueryDTO;
 import com.virgo.hw.bean.vo.SubjectPoolResultVO;
 import com.virgo.hw.bean.vo.SubjectPoolVO;
@@ -47,6 +48,11 @@ public class SubjectPoolCtrl {
     @GetMapping("subject/delete")
     public Integer delete(@RequestParam("subjectId") String subjectId) {
         return subjectPoolService.deleteEntity(subjectId);
+    }
+
+    @PostMapping("subject/pool/edit")
+    public Integer editEntity(@RequestBody SubjectPoolDTO dto) {
+        return subjectPoolService.editEntity(dto);
     }
 
 }

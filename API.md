@@ -119,8 +119,8 @@
 
     | 字段 | 含义 | 
     | :-----| ----: |
-    | page | 当前页 |
-    | size      | 每页大小  |
+    | page | 当前页* |
+    | size      | 每页大小*  |
     | chapterId   | 章节ID    |
     | firstLevelId   | 一级知识点ID    |
     | secondLevelId   | 二级知识点ID    |
@@ -217,9 +217,121 @@
     | code | 自定义code |
     | message      | success  |
     | data   | 影响行数    |
+    
+#### 4 编辑试题
+* 请求方式: POST 
+* 请求格式: Content-Type: application/json
+* 响应格式: JSON
+* URL: http://106.55.161.213:8099/virgo/subject/pool/edit
+* 请求参数说明
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | subjectId | 试题ID* |
+    | chapterId | 章节ID |
+    | firstLevelId | 一级知识点ID |
+    | secondLevelId | 二级知识点ID |
+    | subjectType | 试题类型 |
+    | subjectDegree | 试题难度 |
+    | source | 试题来源 |
+
+* 响应结果:
+    ```json
+     {
+         "code": 0,
+         "message": "success",
+         "data": 1
+     }
+    ```
+* 响应参数说明:
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | code | 自定义code |
+    | message      | success  |
+    | data   | 影响行数    |
+
+#### 5 章节列表
+* 请求方式: GET 
+* 请求格式: Content-Type: application/json
+* 响应格式: JSON
+* URL: http://106.55.161.213:8099/virgo/chapters
+* 请求参参数: 无
+* 响应结果:
+    ```json
+     {
+         "code": 0,
+         "message": "success",
+         "data": [
+             {
+                 "k": "1",
+                 "v": "数学"
+             }
+         ]
+     }
+    ```
+* 响应参数说明:
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | code | 自定义code |
+    | message      | success  |
+    | data   | k,v   |
 
 
+#### 6 一级知识点
+* 请求方式: GET 
+* 请求格式: Content-Type: application/json
+* 响应格式: JSON
+* URL: http://106.55.161.213:8099/virgo/level/first/list
+* 请求参参数: 无
+* 响应结果:
+    ```json
+    {
+        "code": 0,
+        "message": "success",
+        "data": [
+            {
+                "k": "1",
+                "v": "一级知识点"
+            }
+        ]
+    }
+    ```
+* 响应参数说明:
 
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | code | 自定义code |
+    | message      | success  |
+    | data   | k,v   |
+
+#### 7 二级知识点
+* 请求方式: GET 
+* 请求格式: Content-Type: application/json
+* 响应格式: JSON
+* URL: http://106.55.161.213:8099/virgo/level/second/list
+* 请求参参数: 无
+* 响应结果:
+    ```json
+    {
+        "code": 0,
+        "message": "success",
+        "data": [
+            {
+                "k": "1",
+                "v": "二级知识点"
+            }
+        ]
+    }
+    ```
+* 响应参数说明:
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | code | 自定义code |
+    | message      | success  |
+    | data   | k,v   |
 
 
 

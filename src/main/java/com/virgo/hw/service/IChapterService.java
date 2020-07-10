@@ -1,6 +1,9 @@
 package com.virgo.hw.service;
 
+import com.virgo.hw.bean.commom.Pair;
 import com.virgo.hw.bean.entity.ChapterEntity;
+
+import java.util.List;
 
 /**
  * @author wangchenkai
@@ -19,5 +22,16 @@ public interface IChapterService {
      * @modified none
      */
     ChapterEntity findEntry(String chapterId);
+
+    /**
+     * javadoc listChapter
+     * @apiNote 所有章节
+     *
+     * @return java.util.List<com.virgo.hw.bean.commom.Pair<java.lang.String,java.lang.String>>
+     * @author wang chenkai
+     * @date 2020/7/10  10:20 上午
+     * @modified none
+     */
+    List<Pair<String, String>> listChapter();
 
 }

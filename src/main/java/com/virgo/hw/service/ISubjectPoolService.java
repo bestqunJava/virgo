@@ -64,7 +64,7 @@ public interface ISubjectPoolService {
 
     /**
      * javadoc deleteEntity
-     * @apiNote 删除
+     * @apiNote 删除试题
      *
      * @param subjectId subjectId
      * @return java.lang.Integer
@@ -73,5 +73,17 @@ public interface ISubjectPoolService {
      * @modified none
      */
     Integer deleteEntity(String subjectId);
+
+    /**
+     * javadoc editEntity
+     * @apiNote 编辑试题
+     *
+     * @param dto dto
+     * @return java.lang.Integer
+     * @author wang chenkai
+     * @date 2020/7/10  10:00 上午
+     * @modified none
+     */
+    Integer editEntity(SubjectPoolDTO dto);
 
 }

@@ -10,7 +10,7 @@ import com.virgo.hw.bean.commom.Pair;
 import com.virgo.hw.bean.dto.*;
 import com.virgo.hw.bean.entity.ChapterEntity;
 import com.virgo.hw.bean.entity.FistLevelEntity;
-import com.virgo.hw.bean.entity.SecondLevel;
+import com.virgo.hw.bean.entity.SecondLevelEntity;
 import com.virgo.hw.bean.entity.SubjectPoolEntity;
 import com.virgo.hw.bean.enums.SnowflakeIdWorker;
 import com.virgo.hw.bean.enums.SubjectTypeEnum;
@@ -138,7 +138,7 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
                 Optional.ofNullable(entry).ifPresent(obj -> vo.setFirstLevel(Pair.of(r.getFirstLevelId(), entry.getFirstLevelName())));
             }
             if (Objects.nonNull(r.getSecondLevelId())) {
-                SecondLevel entry = levelService.findSecondLevel(r.getSecondLevelId());
+                SecondLevelEntity entry = levelService.findSecondLevel(r.getSecondLevelId());
                 Optional.ofNullable(entry).ifPresent(obj ->
                         vo.setSecondLevel(Pair.of(r.getSecondLevelId(), entry.getSecondLevelName())));
             }
@@ -168,5 +168,13 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
                 .setState(1);
         Wrapper<SubjectPoolEntity> wrapper = new UpdateWrapper<>(new SubjectPoolEntity().setSubjectId(subjectId));
         return subjectPoolMapper.update(entity, wrapper);
+    }
+
+    @Override
+    public Integer editEntity(SubjectPoolDTO dto) {
+        SubjectPoolEntity entity = new SubjectPoolEntity();
+        BeanUtils.copyProperties(dto, entity);
+        Wrapper<SubjectPoolEntity> wrapper = new UpdateWrapper<>(new SubjectPoolEntity().setSubjectId(dto.getSubjectId()));
+        return subjectPoolMapper.update(entity.setSubjectId(null), wrapper);
     }
 }
