@@ -6,28 +6,28 @@
         SELECT * FROM subject_pool
         WHERE state = 0
         <if test="chapterId != null">
-            AND chapter_id = #{chapterId},
+            AND chapter_id = #{chapterId}
         </if>
         <if test="firstLevelId != null">
-            AND first_level_id = #{firstLevelId},
+            AND first_level_id = #{firstLevelId}
         </if>
         <if test="secondLevelId != null">
-            AND second_level_id = #{secondLevelId},
+            AND second_level_id = #{secondLevelId}
         </if>
         <if test="subjectType != null">
-            AND subject_type = #{subjectType},
+            AND subject_type = #{subjectType}
         </if>
         <if test="past != null">
-            AND past = #{past},
+            AND past = #{past}
         </if>
         <if test="subjectDegree != null">
-            AND subject_degree = #{subjectDegree},
+            AND subject_degree = #{subjectDegree}
         </if>
         <if test="source != null">
-            AND source = #{source},
+            AND source = #{source}
         </if>
         <if test="subjectId != null">
-            AND subject_id = #{subjectId},
+            AND subject_id = #{subjectId}
         </if>
         <if test="subjectContent != null">
             AND subject_content LIKE CONCAT('%', #{subjectContent}, '%')
