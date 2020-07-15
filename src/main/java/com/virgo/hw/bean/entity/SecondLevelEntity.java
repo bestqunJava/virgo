@@ -1,5 +1,6 @@
 package com.virgo.hw.bean.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @TableName("second_level")
 public class SecondLevelEntity {
 
+    @TableField(exist = false)
     private String id;
 
     private String secondLevelId;

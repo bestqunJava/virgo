@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.virgo.hw.bean.commom.Pair;
 import com.virgo.hw.bean.entity.ChapterEntity;
+import com.virgo.hw.bean.enums.SnowflakeIdWorker;
 import com.virgo.hw.mapper.ChapterMapper;
 import com.virgo.hw.service.IChapterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,5 +37,11 @@ public class ChapterServiceImpl implements IChapterService {
         Wrapper<ChapterEntity> wrapper = new QueryWrapper<>(new ChapterEntity());
         return chapterMapper.selectList(wrapper).stream().map(r ->
                 Pair.of(r.getChapterId(), r.getChapterName())).collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer insertEntity(ChapterEntity entity) {
+        return chapterMapper.insert(entity.setChapterId(SnowflakeIdWorker.takeIdStringRandom())
+                .setCreateTime(LocalDateTime.now()));
     }
 }

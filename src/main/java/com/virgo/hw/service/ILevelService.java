@@ -60,4 +60,28 @@ public interface ILevelService {
      */
     List<Pair<String, String>> listSecondLevel(String firstLevelId);
 
+    /**
+     * javadoc firstLevelInsert
+     * @apiNote insert
+     *
+     * @param entity entity
+     * @return java.lang.Integer
+     * @author wang chenkai
+     * @date 2020/7/15  2:23 下午
+     * @modified none
+     */
+    Integer firstLevelInsert(FistLevelEntity entity);
+
+    /**
+     * javadoc secondLevelInsert
+     * @apiNote insert
+     *
+     * @param entity entity
+     * @return java.lang.Integer
+     * @author wang chenkai
+     * @date 2020/7/15  2:23 下午
+     * @modified none
+     */
+    Integer secondLevelInsert(SecondLevelEntity entity);
+
 }

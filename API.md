@@ -332,6 +332,85 @@
     | code | 自定义code |
     | message      | success  |
     | data   | k,v   |
+    
+#### 9 添加章节
+* 请求方式: GET 
+* 请求格式: Content-Type: application/json
+* 响应格式: JSON
+* URL: http://106.55.161.213:8099/virgo/chapter/inser?chapterName=乌龙茶
+* 请求参数: chapterName: 章节名称
+* 响应结果:
+    ```json
+     {
+         "code": 0,
+         "message": "success",
+         "data": 1
+     }
+    ```
+* 响应参数说明:
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | code | 自定义code |
+    | message      | success  |
+    | data   | 影响行数    |
+    
+#### 10 添加一级知识点
+* 请求方式: POST 
+* 请求格式: Content-Type: application/json
+* 响应格式: JSON
+* URL: http://106.55.161.213:8099/virgo/level/first/insert
+* 请求参数: chapterId: 章节ID, firstLevelName: 一级知识点名称
+    ```json
+        {
+        "chapterId": "124684610746449994",
+        "firstLevelName": "菊花茶"
+        }
+    ```
+* 响应结果:
+    ```json
+     {
+         "code": 0,
+         "message": "success",
+         "data": 1
+     }
+    ```
+* 响应参数说明:
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | code | 自定义code |
+    | message      | success  |
+    | data   | 影响行数    |
+    
+#### 11 添加二级知识点
+* 请求方式: POST 
+* 请求格式: Content-Type: application/json
+* 响应格式: JSON
+* URL: http://106.55.161.213:8099/virgo/level/second/insert
+* 请求参数: firstLevelId: 一级知识点ID, secondLevelName: 二级知识点名称
+    ```json
+        {
+        "firstLevelId": "124687378093703189",
+        "secondLevelName": "屁屁"
+        }
+    ```
+* 响应结果:
+    ```json
+     {
+         "code": 0,
+         "message": "success",
+         "data": 1
+     }
+    ```
+* 响应参数说明:
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | code | 自定义code |
+    | message      | success  |
+    | data   | 影响行数    |
+
 
 
 

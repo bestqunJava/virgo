@@ -34,4 +34,16 @@ public interface IChapterService {
      */
     List<Pair<String, String>> listChapter();
 
+    /**
+     * javadoc insertEntity
+     * @apiNote 添加章节
+     *
+     * @param entity entity
+     * @return java.lang.Integer
+     * @author wang chenkai
+     * @date 2020/7/15  2:14 下午
+     * @modified none
+     */
+    Integer insertEntity(ChapterEntity entity);
+
 }

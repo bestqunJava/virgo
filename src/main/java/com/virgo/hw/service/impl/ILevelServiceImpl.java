@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.virgo.hw.bean.commom.Pair;
 import com.virgo.hw.bean.entity.FistLevelEntity;
 import com.virgo.hw.bean.entity.SecondLevelEntity;
+import com.virgo.hw.bean.enums.SnowflakeIdWorker;
 import com.virgo.hw.mapper.FistLevelMapper;
 import com.virgo.hw.mapper.SecondLevelMapper;
 import com.virgo.hw.service.ILevelService;
@@ -12,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -33,13 +36,13 @@ public class ILevelServiceImpl implements ILevelService {
     @Override
     public FistLevelEntity findFirstLevel(String firstLevelId) {
         return fistLevelMapper.selectOne(new QueryWrapper<>(new FistLevelEntity()
-                .setChapterId(firstLevelId)));
+                .setFirstLevelId(firstLevelId)));
     }
 
     @Override
     public SecondLevelEntity findSecondLevel(String secondLevelId) {
         return secondLevelMapper.selectOne(new QueryWrapper<>(new SecondLevelEntity()
-                .setChapterId(secondLevelId)));
+                .setSecondLevelId(secondLevelId)));
     }
 
     @Override
@@ -54,5 +57,21 @@ public class ILevelServiceImpl implements ILevelService {
         Wrapper<SecondLevelEntity> wrapper = new QueryWrapper<>(new SecondLevelEntity().setFirstLevelId(firstLevelId));
         return secondLevelMapper.selectList(wrapper).stream().map(r ->
                 Pair.of(r.getSecondLevelId(), r.getSecondLevelName())).collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer firstLevelInsert(FistLevelEntity entity) {
+        return fistLevelMapper.insert(entity.setCreateTime(LocalDateTime.now())
+                .setFirstLevelId(SnowflakeIdWorker.takeIdStringRandom())
+        );
+    }
+
+    @Override
+    public Integer secondLevelInsert(SecondLevelEntity entity) {
+        FistLevelEntity firstLevel = this.findFirstLevel(entity.getFirstLevelId());
+        return secondLevelMapper.insert(entity.setCreateTime(LocalDateTime.now())
+                .setSecondLevelId(SnowflakeIdWorker.takeIdStringRandom())
+                .setChapterId(Objects.nonNull(firstLevel) ? firstLevel.getChapterId() : null)
+        );
     }
 }
