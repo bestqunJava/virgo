@@ -1,13 +1,12 @@
 package com.virgo.hw.feign;
 
 import com.virgo.hw.bean.dto.CollectPhotoDTO;
-import com.virgo.hw.bean.dto.YouDaoResponse;
 import com.virgo.hw.bean.dto.CollectPhotoResult;
+import com.virgo.hw.bean.dto.YouDaoResponse;
 import com.virgo.hw.util.FeignSimpleEncoderConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author wangchenkai
@@ -19,7 +18,7 @@ public interface YouDaoApiClient {
 
     /**
      * javadoc photoCollect
-     * @apiNote 拍照收集题
+     * @apiNote 有道云拍照收集题
      *
      * @param dto dto
      * @return com.virgo.hw.bean.dto.CollectPhotoResponse<com.virgo.hw.bean.dto.CollectPhotoResult>
