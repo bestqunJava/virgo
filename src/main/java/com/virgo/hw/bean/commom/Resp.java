@@ -63,7 +63,7 @@ public class Resp<T> {
      *
      * @param resp 接口返回结果
      * @return boolean
-     * @author weng xiaoyong
+     * @author wang chenkai
      * @date 2020/1/13 16:55
      * @modified none
      */
@@ -78,7 +78,7 @@ public class Resp<T> {
      * @param resp 接口返回结果
      * @param code a given logic interface code
      * @return boolean
-     * @author weng xiaoyong
+     * @author wang chenkai
      * @date 2020/1/13 16:55
      * @modified none
      */
@@ -109,7 +109,7 @@ public class Resp<T> {
      *
      * @return com.ws.leo.common.response.LeoResp<T>
      * @apiNote 某些特殊情况下 不需要返回数据实体, 只需要告知接口处理成功即可
-     * @author weng xiaoyong
+     * @author wang chenkai
      * @date 2019/10/11 11:12
      * @modified none
      */
@@ -126,7 +126,7 @@ public class Resp<T> {
      * @param data 需要返回的数据
      * @return com.ws.leo.common.response.LeoResp<T>
      * @apiNote 接口处理成功, 无需特殊处理code 及 message, 采用默认的成功code 及 message 去包裹data
-     * @author weng xiaoyong
+     * @author wang chenkai
      * @date 2019/10/11 11:13
      * @modified none
      */
@@ -141,7 +141,7 @@ public class Resp<T> {
      * @param data 需要返回的数据
      * @return com.ws.leo.common.response.LeoResp<T>
      * @apiNote 接口处理成功, 但需要特殊的code
-     * @author weng xiaoyong
+     * @author wang chenkai
      * @date 2019/10/11 11:14
      * @modified none
      */
@@ -160,7 +160,7 @@ public class Resp<T> {
      * @param data    返回的数据
      * @return com.ws.leo.common.response.LeoResp<T>
      * @apiNote 接口处理成功, 但是需要自定义的code 及 message 与前端交互
-     * @author weng xiaoyong
+     * @author wang chenkai
      * @date 2019/10/11 11:18
      * @modified none
      */
@@ -177,7 +177,7 @@ public class Resp<T> {
      * @param extra   需要额外携带的交互数据
      * @return com.ws.leo.common.response.LeoResp<T>
      * @apiNote code message extra 全部自定义
-     * @author weng xiaoyong
+     * @author wang chenkai
      * @date 2019/10/11 11:19
      * @modified none
      */
@@ -193,7 +193,7 @@ public class Resp<T> {
      * @return com.ws.leo.common.response.LeoResp<T>
      * @apiNote 接口处理异常 或者 逻辑异常
      * 采用默认的error code 及 自定义的error message 进行封装
-     * @author weng xiaoyong
+     * @author wang chenkai
      * @date 2019/10/11 11:22
      * @modified none
      */
