@@ -337,7 +337,7 @@
 * 请求方式: GET 
 * 请求格式: Content-Type: application/json
 * 响应格式: JSON
-* URL: http://106.55.161.213:8099/virgo/chapter/inser?chapterName=乌龙茶
+* URL: http://106.55.161.213:8099/virgo/chapter/insert?chapterName=乌龙茶
 * 请求参数: chapterName: 章节名称
 * 响应结果:
     ```json
