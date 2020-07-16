@@ -32,7 +32,8 @@ public class UnifiedHttpResponseHandler implements ResponseBodyAdvice {
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
         AnnotatedElement element = returnType.getAnnotatedElement();
-        return REQUEST_ANNOTATIONS.stream().anyMatch(annotation -> annotation.isAnnotation() && element.isAnnotationPresent(annotation) && !element.isAnnotationPresent(CUSTOM_RESPONSE_ADVICE));
+        return REQUEST_ANNOTATIONS.stream().anyMatch(annotation ->
+                annotation.isAnnotation() && element.isAnnotationPresent(annotation) && !element.isAnnotationPresent(CUSTOM_RESPONSE_ADVICE));
     }
 
     @Override
