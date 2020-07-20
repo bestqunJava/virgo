@@ -1,6 +1,9 @@
 package com.virgo.hw.ctrl;
 
+import com.virgo.hw.bean.commom.PageData;
 import com.virgo.hw.bean.dto.PaperDTO;
+import com.virgo.hw.bean.dto.PaperQueryDTO;
+import com.virgo.hw.bean.dto.PaperResultDTO;
 import com.virgo.hw.service.IPaperService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,5 +28,10 @@ public class PaperCtrl {
     @PostMapping("paper/insert")
     public Integer insert(@RequestBody PaperDTO dto) {
         return paperService.insertEntity(dto);
+    }
+
+    @PostMapping("paper/list")
+    public PageData<PaperResultDTO> list(@RequestBody PaperQueryDTO dto) {
+        return paperService.list(dto);
     }
 }

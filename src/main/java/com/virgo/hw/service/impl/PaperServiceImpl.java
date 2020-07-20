@@ -1,6 +1,11 @@
 package com.virgo.hw.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.virgo.hw.bean.commom.PageData;
 import com.virgo.hw.bean.dto.PaperDTO;
+import com.virgo.hw.bean.dto.PaperQueryDTO;
+import com.virgo.hw.bean.dto.PaperResultDTO;
 import com.virgo.hw.bean.entity.PaperEntity;
 import com.virgo.hw.bean.entity.PaperSubjectRelationEntity;
 import com.virgo.hw.exception.ServiceException;
@@ -14,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -44,5 +50,18 @@ public class PaperServiceImpl implements IPaperService {
             return insert;
         }
         throw new ServiceException("添加试卷异常");
+    }
+
+    @Override
+    public PageData<PaperResultDTO> list(PaperQueryDTO dto) {
+        final Page<PaperEntity> data = PageHelper.startPage(dto.getPage(), dto.getSize(), true)
+                .doSelectPage(() -> paperMapper.listPapers(dto));
+        final AtomicInteger index = new AtomicInteger((dto.getPage() - 1) * dto.getSize());
+        List<PaperResultDTO> list = data.getResult().stream().map(r -> {
+            PaperResultDTO vo = new PaperResultDTO();
+            BeanUtils.copyProperties(r, vo);
+            return vo.setNo(index.incrementAndGet());
+        }).collect(Collectors.toList());
+        return PageData.page(dto.getPage(), dto.getSize(), data.getTotal(), list);
     }
 }

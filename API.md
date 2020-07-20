@@ -440,6 +440,64 @@
     | code | 自定义code |
     | message      | success  |
     | data   | 影响行数    |
+    
+#### 13 试卷管理
+* 请求方式: POST 
+* 请求格式: Content-Type: application/json
+* 响应格式: JSON
+* URL: http://106.55.161.213:8099/virgo/paper/list
+* 请求参数说明
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | page | 当前页* |
+    | size      | 每页大小*  |
+    | paperName   | 试卷名称    |
+    | startTime   | 开始时间 yyyy-MM-dd HH:mm:ss    |  
+    | endTime   | 结束时间 yyyy-MM-dd HH:mm:ss    |  
+    | examStartTime   | 考试开始时间 yyyy-MM-dd HH:mm:ss    |  
+    | examEndTime   | 考试结束时间 yyyy-MM-dd HH:mm:ss    |  
+* 请求参数示例: 
+    ```json
+      {
+      "page": 1,
+      "size": 10
+      }
+    ```
+* 响应结果:
+    ```json
+      {
+          "code": 0,
+          "message": "success",
+          "data": {
+              "page": 1,
+              "size": 10,
+              "pages": 1,
+              "total": 1,
+              "list": [
+                  {
+                      "no": 1,
+                      "id": 5,
+                      "paperName": "124687378093703189",
+                      "sortArray": "{1,2,3}",
+                      "beginTime": "2020-07-12 11:01:37",
+                      "createTime": "2020-07-20 16:11:57"
+                  }
+              ]
+          }
+      }
+    ```
+* 响应参数说明:
+
+    | 字段 | 含义 | 
+    | :-----| ----: |
+    | code | 自定义code |
+    | message      | success  |
+    | -no   | 编号    |
+    | -paperName   | 试卷名称    |
+    | -sortArray   | 排序json    |
+    | -beginTime   | 考试时间    |
+    | -createTime   | 创建时间    |
 
 
 

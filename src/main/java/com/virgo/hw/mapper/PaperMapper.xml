@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.virgo.hw.mapper.PaperMapper">
+
+    <select id = "listPapers" parameterType="com.virgo.hw.bean.dto.PaperQueryDTO" resultType="com.virgo.hw.bean.entity.PaperEntity">
+        SELECT * FROM paper
+        <where>
+            <if test="paperName != null">
+                AND paper_name LIKE CONCAT('%', #{paperName}, '%')
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+            <if test="examStartTime != null and examEndTime != null">
+                AND begin_time BETWEEN #{examStartTime} AND #{examEndTime}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
 </mapper>
