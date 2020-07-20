@@ -504,7 +504,7 @@
 * 请求方式: GET 
 * 请求格式: Content-Type: application/json
 * 响应格式: JSON
-* URL: http://106.55.161.213:8099/virgo/paper/subject?id=5
+* URL: http://106.55.161.213:8099/virgo/paper/subjects?id=5
 * 请求参数说明: id: 试卷ID 
 * 响应结果:
     ```json
