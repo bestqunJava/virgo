@@ -3,10 +3,12 @@ package com.virgo.hw.service;
 import com.virgo.hw.bean.commom.PageData;
 import com.virgo.hw.bean.dto.SubjectPoolDTO;
 import com.virgo.hw.bean.dto.SubjectQueryDTO;
+import com.virgo.hw.bean.entity.SubjectPoolEntity;
 import com.virgo.hw.bean.vo.SubjectPoolResultVO;
 import com.virgo.hw.bean.vo.SubjectPoolVO;
 
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author wangchenkai
@@ -85,5 +87,17 @@ public interface ISubjectPoolService {
      * @modified none
      */
     Integer editEntity(SubjectPoolDTO dto);
+
+    /**
+     * javadoc listSubject
+     * @apiNote 通过试题IDs获取试题列表
+     *
+     * @param ids ids
+     * @return java.util.List<com.virgo.hw.bean.vo.SubjectPoolResultVO>
+     * @author wang chenkai
+     * @date 2020/7/20  5:04 下午
+     * @modified none
+     */
+    List<SubjectPoolEntity> listSubject(List<String> ids);
 
 }

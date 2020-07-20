@@ -4,6 +4,8 @@ import com.virgo.hw.bean.commom.PageData;
 import com.virgo.hw.bean.dto.PaperDTO;
 import com.virgo.hw.bean.dto.PaperQueryDTO;
 import com.virgo.hw.bean.dto.PaperResultDTO;
+import com.virgo.hw.bean.dto.PaperSubjectDTO;
+import com.virgo.hw.bean.vo.SubjectPoolResultVO;
 
 import java.util.List;
 
@@ -36,4 +38,16 @@ public interface IPaperService {
     * @modified none
     */
    PageData<PaperResultDTO> list(PaperQueryDTO dto);
+
+   /**
+    * javadoc subjects
+    * @apiNote 试题列表
+    *
+    * @param id 试题id
+    * @return com.virgo.hw.bean.dto.PaperSubjectDTO
+    * @author wang chenkai
+    * @date 2020/7/20  4:59 下午
+    * @modified none
+    */
+   PaperSubjectDTO subjects(Integer id);
 }

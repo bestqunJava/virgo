@@ -16,6 +16,7 @@ import com.virgo.hw.bean.enums.SnowflakeIdWorker;
 import com.virgo.hw.bean.enums.SubjectTypeEnum;
 import com.virgo.hw.bean.vo.SubjectPoolResultVO;
 import com.virgo.hw.bean.vo.SubjectPoolVO;
+import com.virgo.hw.exception.ServiceException;
 import com.virgo.hw.feign.YouDaoApiClient;
 import com.virgo.hw.mapper.SubjectPoolMapper;
 import com.virgo.hw.service.IChapterService;
@@ -23,6 +24,7 @@ import com.virgo.hw.service.ILevelService;
 import com.virgo.hw.service.ISubjectPoolService;
 import com.virgo.hw.util.YouDaoSignUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -176,5 +178,15 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
         BeanUtils.copyProperties(dto, entity);
         Wrapper<SubjectPoolEntity> wrapper = new UpdateWrapper<>(new SubjectPoolEntity().setSubjectId(dto.getSubjectId()));
         return subjectPoolMapper.update(entity.setSubjectId(null), wrapper);
+    }
+
+    @Override
+    public List<SubjectPoolEntity> listSubject(List<String> ids) {
+        if (CollectionUtils.isEmpty(ids)) {
+            log.error("非法参数异常");
+            throw new ServiceException("非法参数异常");
+        }
+        Wrapper<SubjectPoolEntity> wrapper = new QueryWrapper<>(new SubjectPoolEntity()).in("subject_id", ids);
+        return subjectPoolMapper.selectList(wrapper);
     }
 }
