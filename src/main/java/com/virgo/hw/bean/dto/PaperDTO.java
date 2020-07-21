@@ -29,6 +29,21 @@ public class PaperDTO {
     private LocalDateTime beginTime;
 
     /**
+     * 选择题备注
+     */
+    private String choiceRemark;
+
+    /**
+     * 解答题备注
+     */
+    private String answerRemark;
+
+    /**
+     * 填空题备注
+     */
+    private String fillBlankRemark;
+
+    /**
      * 试题ids
      */
     private List<String>  subjectIds;

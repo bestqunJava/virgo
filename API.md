@@ -416,13 +416,16 @@
 * 请求格式: Content-Type: application/json
 * 响应格式: JSON
 * URL: http://106.55.161.213:8099/virgo/paper/insert
-* 请求参数: paperName: 试卷名称, sortArray: 排序json, subjectIds: 试题id集合, beginTime: 开始考试时间
+* 请求参数: paperName: 试卷名称, sortArray: 排序json, subjectIds: 试题id集合, beginTime: 开始考试时间, choiceRemark: 选择题备注, answerRemark: 解答题备注, fillBlankRemark: 填空题备注
     ```json
         {
         "paperName": "124687378093703189",
         "sortArray": "{1,2,3}",
         "subjectIds": ["122871767210401810","122872896681934895", "123547847445450813"],
-        "beginTime": "2020-07-12 11:01:37"
+        "beginTime": "2020-07-12 11:01:37",
+        "choiceRemark": "a",
+        "answerRemark": "b",
+        "fillBlankRemark": "c"
         }
     ```
 * 响应结果:

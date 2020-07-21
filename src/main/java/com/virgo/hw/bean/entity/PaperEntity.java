@@ -28,6 +28,12 @@ public class PaperEntity {
 
     private LocalDateTime beginTime;
 
+    private String choiceRemark;
+
+    private String answerRemark;
+
+    private String fillBlankRemark;
+
     private LocalDateTime createTime;
 
 }
