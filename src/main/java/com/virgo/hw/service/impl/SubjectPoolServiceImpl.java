@@ -104,7 +104,7 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
             );
         } catch (Exception e) {
             log.error("搜题服务异常...");
-            throw new RuntimeException("搜题服务异常...", e);
+            throw new ServiceException("搜题服务异常...", e);
         }
         if (YouDaoResponse.ok(resp)) {
             CollectPhotoResult data = resp.getData();
@@ -118,7 +118,7 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
             }).orElse(null);
         }
         log.error("添加试题异常{}", resp);
-        throw new RuntimeException("添加试题异常");
+        throw new ServiceException("添加试题异常");
     }
 
     @Override
