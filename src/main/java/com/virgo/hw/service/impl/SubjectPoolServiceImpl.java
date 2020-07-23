@@ -153,14 +153,7 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
         final Page<SubjectPoolEntity> data = PageHelper.startPage(dto.getPage(), dto.getSize(), true)
                 .doSelectPage(() -> subjectPoolMapper.listSubject(dto));
         final AtomicInteger index = new AtomicInteger((dto.getPage() - 1) * dto.getSize());
-        List<SubjectPoolResultVO> list = data.getResult().stream().map(r -> {
-            SubjectPoolResultVO vo = new SubjectPoolResultVO();
-            BeanUtils.copyProperties(r, vo);
-            if (Objects.nonNull(r.getSubjectType())) {
-                vo.setSubjectType(Pair.of(r.getSubjectType(), SubjectTypeEnum.getEnum(r.getSubjectType()).getMsg()));
-            }
-            return vo.setNo(index.incrementAndGet());
-        }).collect(Collectors.toList());
+        List<SubjectPoolResultVO> list = data.getResult().stream().map(r -> entityToVO(index, r)).collect(Collectors.toList());
         return PageData.page(dto.getPage(), dto.getSize(), data.getTotal(), list);
     }
 
@@ -188,5 +181,36 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
         }
         Wrapper<SubjectPoolEntity> wrapper = new QueryWrapper<>(new SubjectPoolEntity()).in("subject_id", ids);
         return subjectPoolMapper.selectList(wrapper);
+    }
+
+    @Override
+    public List<SubjectPoolResultVO> listSubjectVO(List<String> ids) {
+        final List<SubjectPoolEntity> entities = this.listSubject(ids);
+        if (CollectionUtils.isEmpty(entities)) {
+            log.error("非法参数异常");
+            throw new ServiceException("非法参数异常");
+        }
+        final AtomicInteger index = new AtomicInteger(0);
+        return entities.stream().map(r -> entityToVO(index, r)).collect(Collectors.toList());
+    }
+
+    /**
+     * javadoc entityToVO
+     * @apiNote entity 转为 VO
+     *
+     * @param index no
+     * @param entity source
+     * @return com.virgo.hw.bean.vo.SubjectPoolResultVO
+     * @author wang chenkai
+     * @date 2020/7/23  11:50 上午
+     * @modified none
+     */
+    private SubjectPoolResultVO entityToVO(AtomicInteger index, SubjectPoolEntity entity) {
+        SubjectPoolResultVO vo = new SubjectPoolResultVO();
+        BeanUtils.copyProperties(entity, vo);
+        if (Objects.nonNull(entity.getSubjectType())) {
+            vo.setSubjectType(Pair.of(entity.getSubjectType(), SubjectTypeEnum.getEnum(entity.getSubjectType()).getMsg()));
+        }
+        return vo.setNo(index.incrementAndGet());
     }
 }

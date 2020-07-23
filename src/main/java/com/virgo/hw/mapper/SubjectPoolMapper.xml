@@ -35,6 +35,12 @@
         <if test="startTime != null and endTime != null">
             AND create_time BETWEEN #{startTime} AND #{endTime}
         </if>
+        <if test="subjectIds != null and subjectIds.size() > 0">
+            AND subject_id IN
+            <foreach collection="subjectIds" item="item" index="index" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
         ORDER BY create_time DESC
     </select>
 

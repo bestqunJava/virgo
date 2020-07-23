@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author wangchenkai
@@ -58,4 +59,8 @@ public class SubjectPoolCtrl {
         return subjectPoolService.editEntity(dto);
     }
 
+    @PostMapping("subject/list/by/ids")
+    public List<SubjectPoolResultVO> listSubjectVO(@RequestBody SubjectQueryDTO dto) {
+        return subjectPoolService.listSubjectVO(dto.getSubjectIds());
+    }
 }

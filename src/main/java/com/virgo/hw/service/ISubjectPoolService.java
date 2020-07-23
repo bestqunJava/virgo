@@ -100,4 +100,16 @@ public interface ISubjectPoolService {
      */
     List<SubjectPoolEntity> listSubject(List<String> ids);
 
+    /**
+     * javadoc listSubjectVO
+     * @apiNote 包裹list
+     *
+     * @param ids entities
+     * @return java.util.List<com.virgo.hw.bean.vo.SubjectPoolResultVO>
+     * @author wang chenkai
+     * @date 2020/7/23  11:44 上午
+     * @modified none
+     */
+    List<SubjectPoolResultVO> listSubjectVO(List<String> ids);
+
 }

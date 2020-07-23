@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author wangchenkai
@@ -63,6 +64,11 @@ public class SubjectQueryDTO {
      * 相似题编号
      */
     private String subjectId;
+
+    /**
+     * 试题ids
+     */
+    private List<String> subjectIds;
 
     /**
      * 试题内容
