@@ -132,6 +132,8 @@
     | subjectContent   | 试题内容    |  
     | startTime   | 开始时间 yyyy-MM-dd HH:mm:ss    |  
     | endTime   | 结束时间 yyyy-MM-dd HH:mm:ss    |  
+    | subjectIds   | 试题ID数组    |  
+
 
 * 请求参数示例: 
     ```json
