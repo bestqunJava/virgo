@@ -73,7 +73,12 @@ public class SubjectQueryDTO {
     /**
      * 试题内容
      */
-    private Integer subjectContent;
+    private String subjectContent;
+
+    /**
+     * 是否划分试题 0 未划分  1 划分
+     */
+    private Integer divide;
 
     /**
      * 开始时间

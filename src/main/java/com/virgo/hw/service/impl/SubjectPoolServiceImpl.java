@@ -25,6 +25,7 @@ import com.virgo.hw.service.ISubjectPoolService;
 import com.virgo.hw.util.YouDaoSignUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -167,10 +168,23 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
 
     @Override
     public Integer editEntity(SubjectPoolDTO dto) {
-        SubjectPoolEntity entity = new SubjectPoolEntity();
-        BeanUtils.copyProperties(dto, entity);
-        Wrapper<SubjectPoolEntity> wrapper = new UpdateWrapper<>(new SubjectPoolEntity().setSubjectId(dto.getSubjectId()));
-        return subjectPoolMapper.update(entity.setSubjectId(null), wrapper);
+        List<String> subjectIds = dto.getSubjectIds();
+        if (CollectionUtils.isNotEmpty(subjectIds)) {
+            Wrapper<SubjectPoolEntity> wrapper = new QueryWrapper<>(new SubjectPoolEntity()).in("subject_id", subjectIds);
+            List<SubjectPoolEntity> subjectPoolEntities = subjectPoolMapper.selectList(wrapper)
+                    .stream()
+                    .filter(r -> Objects.isNull(r.getSubjectType()) && StringUtils.isEmpty(r.getChapterId()) && StringUtils.isEmpty(r.getFirstLevelId()) && StringUtils.isEmpty(r.getSecondLevelId()))
+                    .collect(Collectors.toList());
+            subjectPoolEntities.forEach(r -> {
+                SubjectPoolEntity entity = new SubjectPoolEntity();
+                BeanUtils.copyProperties(dto, entity);
+                Wrapper<SubjectPoolEntity> updateWrapper = new UpdateWrapper<>(new SubjectPoolEntity().setSubjectId(dto.getSubjectId()));
+                subjectPoolMapper.update(entity.setSubjectId(null), updateWrapper);
+            });
+            return subjectPoolEntities.size();
+        }
+        log.error("非法参数异常");
+        throw new ServiceException("非法参数异常");
     }
 
     @Override

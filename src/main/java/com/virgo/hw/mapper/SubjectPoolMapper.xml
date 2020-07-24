@@ -41,6 +41,12 @@
                 #{item}
             </foreach>
         </if>
+        <if test="divide != null and divide == 0">
+            AND subject_type IS NULL AND chapter_id IS NULL AND first_level_id IS NULL AND second_level_id IS NULL
+        </if>
+        <if test="divide != null and divide == 1">
+            AND subject_type IS NOT NULL AND chapter_id IS NOT NULL AND first_level_id IS NOT NULL AND second_level_id IS NOT NULL
+        </if>
         ORDER BY create_time DESC
     </select>
 

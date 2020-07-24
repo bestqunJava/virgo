@@ -3,6 +3,8 @@ package com.virgo.hw.bean.dto;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.util.List;
+
 /**
  * @author wangchenkai
  * @since 2020/6/28 5:07 下午
@@ -30,5 +32,7 @@ public class SubjectPoolDTO {
     private Integer subjectDegree;
 
     private Integer past;
+
+    private List<String> subjectIds;
 
 }

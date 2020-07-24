@@ -133,6 +133,7 @@
     | startTime   | 开始时间 yyyy-MM-dd HH:mm:ss    |  
     | endTime   | 结束时间 yyyy-MM-dd HH:mm:ss    |  
     | subjectIds   | 试题ID数组    |  
+    | divide   | 是否划分归类试题 0 未划分  1 划分    |  
 
 
 * 请求参数示例: 
@@ -149,7 +150,8 @@
       "subjectId": "122506638568456219",
       "subjectContent": "x",
       "startTime": "2020-07-09 14:20:13",
-      "endTime": "2020-07-09 14:20:13"
+      "endTime": "2020-07-09 14:20:13",
+      "divide": 1
       }
     ```
 * 响应结果:
@@ -229,7 +231,7 @@
 
     | 字段 | 含义 | 
     | :-----| ----: |
-    | subjectId | 试题ID* |
+    | subjectIds | 试题ID数组* |
     | chapterId | 章节ID |
     | firstLevelId | 一级知识点ID |
     | secondLevelId | 二级知识点ID |

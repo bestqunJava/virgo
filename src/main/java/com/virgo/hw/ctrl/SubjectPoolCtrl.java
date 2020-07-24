@@ -7,6 +7,7 @@ import com.virgo.hw.bean.dto.SubjectPoolDTO;
 import com.virgo.hw.bean.dto.SubjectQueryDTO;
 import com.virgo.hw.bean.vo.SubjectPoolResultVO;
 import com.virgo.hw.bean.vo.SubjectPoolVO;
+import com.virgo.hw.exception.ServiceException;
 import com.virgo.hw.service.ISubjectPoolService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class SubjectPoolCtrl {
             return Resp.ok(subjectPoolService.photoCollect(file.getInputStream()));
         } catch (IOException e) {
             log.error("获取上传图片流异常!");
-            throw new RuntimeException("获取上传图片流异常!", e);
+            throw new ServiceException("获取上传图片流异常!", e);
         }
     }
 
