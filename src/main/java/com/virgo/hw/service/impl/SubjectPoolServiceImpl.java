@@ -8,9 +8,6 @@ import com.github.pagehelper.PageHelper;
 import com.virgo.hw.bean.commom.PageData;
 import com.virgo.hw.bean.commom.Pair;
 import com.virgo.hw.bean.dto.*;
-import com.virgo.hw.bean.entity.ChapterEntity;
-import com.virgo.hw.bean.entity.FistLevelEntity;
-import com.virgo.hw.bean.entity.SecondLevelEntity;
 import com.virgo.hw.bean.entity.SubjectPoolEntity;
 import com.virgo.hw.bean.enums.SnowflakeIdWorker;
 import com.virgo.hw.bean.enums.SubjectTypeEnum;
@@ -19,8 +16,6 @@ import com.virgo.hw.bean.vo.SubjectPoolVO;
 import com.virgo.hw.exception.ServiceException;
 import com.virgo.hw.feign.YouDaoApiClient;
 import com.virgo.hw.mapper.SubjectPoolMapper;
-import com.virgo.hw.service.IChapterService;
-import com.virgo.hw.service.ILevelService;
 import com.virgo.hw.service.ISubjectPoolService;
 import com.virgo.hw.util.YouDaoSignUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -51,12 +46,6 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
 
     @Resource
     YouDaoApiClient youDaoApiClient;
-
-    @Resource
-    IChapterService chapterService;
-
-    @Resource
-    ILevelService levelService;
 
     /**
      * 上传类型， 仅支持base64上传，请填写固定值1
@@ -123,30 +112,13 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
     }
 
     @Override
-    public SubjectPoolVO findEntity(String subjectId) {
-        SubjectPoolEntity entity = subjectPoolMapper.selectOne(new QueryWrapper<>(new SubjectPoolEntity()
-                .setSubjectId(subjectId)));
-        return Optional.ofNullable(entity).map(r -> {
+    public List<SubjectPoolVO> findEntity(SubjectQueryDTO dto) {
+        Wrapper<SubjectPoolEntity> wrapper = new QueryWrapper<>(new SubjectPoolEntity()).in("subject_id", dto.getSubjectIds());
+        return subjectPoolMapper.selectList(wrapper).stream().map(r -> {
             SubjectPoolVO vo = new SubjectPoolVO();
             BeanUtils.copyProperties(r, vo);
-            if (Objects.nonNull(r.getSubjectType())) {
-                vo.setSubjectType(Pair.of(r.getSubjectType(), SubjectTypeEnum.getEnum(r.getSubjectType()).getMsg()));
-            }
-            if (Objects.nonNull(r.getChapterId())) {
-                ChapterEntity entry = chapterService.findEntry(r.getChapterId());
-                Optional.ofNullable(entry).ifPresent(obj -> vo.setChapter(Pair.of(r.getChapterId(), obj.getChapterName())));
-            }
-            if (Objects.nonNull(r.getFirstLevelId())) {
-                FistLevelEntity entry = levelService.findFirstLevel(r.getFirstLevelId());
-                Optional.ofNullable(entry).ifPresent(obj -> vo.setFirstLevel(Pair.of(r.getFirstLevelId(), entry.getFirstLevelName())));
-            }
-            if (Objects.nonNull(r.getSecondLevelId())) {
-                SecondLevelEntity entry = levelService.findSecondLevel(r.getSecondLevelId());
-                Optional.ofNullable(entry).ifPresent(obj ->
-                        vo.setSecondLevel(Pair.of(r.getSecondLevelId(), entry.getSecondLevelName())));
-            }
             return vo;
-        }).orElse(null);
+        }).collect(Collectors.toList());
     }
 
     @Override
@@ -171,7 +143,7 @@ public class SubjectPoolServiceImpl implements ISubjectPoolService {
         List<String> subjectIds = dto.getSubjectIds();
         if (CollectionUtils.isNotEmpty(subjectIds)) {
             Wrapper<SubjectPoolEntity> wrapper = new QueryWrapper<>(new SubjectPoolEntity()).in("subject_id", subjectIds);
-            List<SubjectPoolEntity> subjectPoolEntities = subjectPoolMapper.selectList(wrapper)
+            final List<SubjectPoolEntity> subjectPoolEntities = subjectPoolMapper.selectList(wrapper)
                     .stream()
                     .filter(r -> Objects.isNull(r.getSubjectType()) && StringUtils.isEmpty(r.getChapterId()) && StringUtils.isEmpty(r.getFirstLevelId()) && StringUtils.isEmpty(r.getSecondLevelId()))
                     .collect(Collectors.toList());

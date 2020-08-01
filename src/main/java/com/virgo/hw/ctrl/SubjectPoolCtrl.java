@@ -40,9 +40,9 @@ public class SubjectPoolCtrl {
         }
     }
 
-    @GetMapping("subject/pool")
-    public SubjectPoolVO subject(@RequestParam("subjectId") String subjectId) {
-        return subjectPoolService.findEntity(subjectId);
+    @PostMapping("subject/pool")
+    public List<SubjectPoolVO> subject(@RequestBody SubjectQueryDTO dto) {
+        return subjectPoolService.findEntity(dto);
     }
 
     @PostMapping("subject/pool/list")

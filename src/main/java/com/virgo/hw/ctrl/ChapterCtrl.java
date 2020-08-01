@@ -1,8 +1,6 @@
 package com.virgo.hw.ctrl;
 
-import com.virgo.hw.bean.anno.CustomResponseAdvice;
 import com.virgo.hw.bean.commom.Pair;
-import com.virgo.hw.bean.commom.Resp;
 import com.virgo.hw.bean.entity.ChapterEntity;
 import com.virgo.hw.service.IChapterService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,9 +34,8 @@ public class ChapterCtrl {
         return chapterService.insertEntity(new ChapterEntity().setChapterName(chapterName));
     }
 
-    @GetMapping("chapter/test")
-    @CustomResponseAdvice
-    public Resp<String> test() {
-        return Resp.ok("test");
+    @GetMapping("chapter/delete")
+    public Integer delete(@RequestParam("chapterId") String chapterId) {
+        return chapterService.deleteEntity(chapterId);
     }
 }

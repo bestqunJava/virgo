@@ -14,13 +14,13 @@ public class SubjectPoolVO {
 
     private String subjectId;
 
-    private Pair<Integer, String> subjectType;
+    private Integer subjectType;
 
-    private Pair<String, String> chapter;
+    private String chapter;
 
-    private Pair<String, String> firstLevel;
+    private String firstLevel;
 
-    private Pair<String, String> secondLevel;
+    private String secondLevel;
 
     private String subjectContent;
 

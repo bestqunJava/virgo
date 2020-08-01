@@ -46,4 +46,16 @@ public interface IChapterService {
      */
     Integer insertEntity(ChapterEntity entity);
 
+    /**
+     * javadoc deleteEntity
+     * @apiNote 删除
+     *
+     * @param chapterId 章节id
+     * @return java.lang.Integer
+     * @author wang chenkai
+     * @date 2020/8/1  12:20 下午
+     * @modified none
+     */
+    Integer deleteEntity(String chapterId);
+
 }

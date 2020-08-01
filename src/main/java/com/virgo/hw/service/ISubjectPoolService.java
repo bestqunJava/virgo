@@ -44,13 +44,13 @@ public interface ISubjectPoolService {
      * javadoc findEntity
      * @apiNote 详情
      *
-     * @param subjectId subjectId
+     * @param dto dto
      * @return com.virgo.hw.bean.vo.SubjectPoolVO
      * @author wang chenkai
      * @date 2020/7/9  4:45 下午
      * @modified none
      */
-    SubjectPoolVO findEntity(String subjectId);
+    List<SubjectPoolVO> findEntity(SubjectQueryDTO dto);
 
     /**
      * javadoc listSubject

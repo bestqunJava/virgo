@@ -41,4 +41,14 @@ public class LevelCtrl {
     public Integer firstLevelInsert(@RequestBody FistLevelEntity entity) {
         return levelService.firstLevelInsert(entity);
     }
+
+    @GetMapping("first/delete")
+    public Integer firstDelete(@RequestParam("firstLevelId") String firstLevelId) {
+        return levelService.deleteEntity(1, firstLevelId);
+    }
+
+    @GetMapping("second/delete")
+    public Integer secondDelete(@RequestParam("secondLevelId") String secondLevelId) {
+        return levelService.deleteEntity(2, secondLevelId);
+    }
 }

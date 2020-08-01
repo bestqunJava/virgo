@@ -44,4 +44,10 @@ public class ChapterServiceImpl implements IChapterService {
         return chapterMapper.insert(entity.setChapterId(SnowflakeIdWorker.takeIdStringRandom())
                 .setCreateTime(LocalDateTime.now()));
     }
+
+    @Override
+    public Integer deleteEntity(String chapterId) {
+        Wrapper<ChapterEntity> wrapper = new QueryWrapper<>(new ChapterEntity().setChapterId(chapterId));
+        return chapterMapper.delete(wrapper);
+    }
 }

@@ -84,4 +84,17 @@ public interface ILevelService {
      */
     Integer secondLevelInsert(SecondLevelEntity entity);
 
+    /**
+     * javadoc deleteEntity
+     * @apiNote 删除
+     *
+     * @param level level
+     * @param levelId levelId
+     * @return java.lang.Integer
+     * @author wang chenkai
+     * @date 2020/8/1  12:28 下午
+     * @modified none
+     */
+    Integer deleteEntity(Integer level, String levelId);
+
 }

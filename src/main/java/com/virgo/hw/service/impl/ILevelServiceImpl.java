@@ -6,6 +6,7 @@ import com.virgo.hw.bean.commom.Pair;
 import com.virgo.hw.bean.entity.FistLevelEntity;
 import com.virgo.hw.bean.entity.SecondLevelEntity;
 import com.virgo.hw.bean.enums.SnowflakeIdWorker;
+import com.virgo.hw.exception.ServiceException;
 import com.virgo.hw.mapper.FistLevelMapper;
 import com.virgo.hw.mapper.SecondLevelMapper;
 import com.virgo.hw.service.ILevelService;
@@ -74,4 +75,18 @@ public class ILevelServiceImpl implements ILevelService {
                 .setChapterId(Objects.nonNull(firstLevel) ? firstLevel.getChapterId() : null)
         );
     }
+
+    @Override
+    public Integer deleteEntity(Integer level, String levelId) {
+        if (1 == level) {
+            Wrapper<FistLevelEntity> wrapper = new QueryWrapper<>(new FistLevelEntity().setFirstLevelId(levelId));
+            return fistLevelMapper.delete(wrapper);
+        }
+        if (2 == level) {
+            Wrapper<SecondLevelEntity> wrapper = new QueryWrapper<>(new SecondLevelEntity().setSecondLevelId(levelId));
+            return secondLevelMapper.delete(wrapper);
+        }
+        throw new ServiceException("非法参数异常");
+    }
+
 }
